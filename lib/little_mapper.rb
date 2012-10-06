@@ -1,6 +1,8 @@
 require "little_mapper/version"
 require "little_mapper/dsl_class_methods"
 require "little_mapper/mapping_factory"
+require "little_mapper/mappers/mappers"
+require "little_mapper/mappers/active_record"
 
 module LittleMapper
 
