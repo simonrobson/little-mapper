@@ -3,10 +3,12 @@ module LittleMapper
     module AR
       class OneToMany < Base
         attr_accessor :entity_field, :persistent_field, :persistent_klass
-        def initialize(entity_field, persistent_klass, persistent_field = nil)
+        attr_accessor :entity_collection_adder
+        def initialize(entity_field, persistent_klass, opts = {})
           @entity_field = entity_field
           @persistent_klass = persistent_klass
-          @persistent_field = persistent_field || entity_field
+          @persistent_field = opts[:persistent_field] || entity_field
+          @entity_collection_adder = opts[:entity_collection_adder]
         end
 
         def to_persistent(target)

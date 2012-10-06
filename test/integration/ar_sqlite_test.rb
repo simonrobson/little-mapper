@@ -7,7 +7,16 @@ class Person < OpenStruct
   attr_accessor :phone_numbers
   def initialize(*args)
     super
+    @cats = []
     @phone_numbers = []
+  end
+
+  def receive_cat(cat)
+    @cats << cat
+  end
+
+  def all_cats
+    @cats
   end
 end
 
@@ -18,20 +27,25 @@ class PhoneNumber
   end
 end
 
-# class Cat
-#   attr_accessor :moniker, :color
-#   def initialize(opts = {})
-#     opts.each_pair {|k, v| self.send("#{k}=", v)}
-#   end
-# end
+class Cat
+  attr_accessor :moniker, :color, :id
+  def initialize(opts = {})
+    opts.each_pair {|k, v| self.send("#{k}=", v)}
+  end
+end
 
 
 module Persistent
   class Person < ActiveRecord::Base
     has_many :phone_numbers
+    has_many :cats
   end
 
   class PhoneNumber < ActiveRecord::Base
+    belongs_to :person
+  end
+
+  class Cat < ActiveRecord::Base
     belongs_to :person
   end
 end
@@ -42,6 +56,8 @@ class PersonMapper
   persistent_entity Persistent::Person
   maps :name, :age
   map :phone_numbers, :as => [PhoneNumber]
+  map :all_cats, :as => [Cat], :entity_collection_adder => :receive_cat,
+      :persistent_field => :cats
 end
 
 class PhoneNumber
@@ -49,6 +65,14 @@ class PhoneNumber
   entity PhoneNumber
   persistent_entity Persistent::PhoneNumber
   maps :code, :number
+end
+
+class CatMapper
+  include LittleMapper
+  entity Cat
+  persistent_entity Persistent::Cat
+  map :color
+  map :moniker, :persistent_field => :name
 end
 
 class CreatePeople < ActiveRecord::Migration
@@ -71,6 +95,16 @@ class CreatePhoneNumbers < ActiveRecord::Migration
   end
 end
 
+class CreateCats < ActiveRecord::Migration
+  def up
+    create_table :cats, :force => true do |t|
+      t.references :person
+      t.string :name
+      t.string :color
+    end
+  end
+end
+
 
 class ArSqliteTest < MiniTest::Unit::TestCase
   DBNAME = 'lmapper.sqlite'
@@ -89,6 +123,7 @@ class ArSqliteTest < MiniTest::Unit::TestCase
   def create_tables
     CreatePeople.new.up
     CreatePhoneNumbers.new.up
+    CreateCats.new.up
   end
 
   def clear_tables
@@ -126,5 +161,14 @@ class ArSqliteTest < MiniTest::Unit::TestCase
     found = LittleMapper[Person].find_by_id(p.id)
     assert_equal 2, found.phone_numbers.length
   end
+
+  def test_one_to_many_with_custom_setters_getters
+    p = Person.new(:name => 'John', :age => 27)
+    p.receive_cat(Cat.new(:moniker => 'Meaw', :color => 'Tabby'))
+    LittleMapper[Person] << p
+    found = LittleMapper[Person].find_by_id(p.id)
+    assert_equal 1, found.all_cats.length
+  end
+
 
 end

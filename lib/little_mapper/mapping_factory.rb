@@ -12,7 +12,7 @@ module LittleMapper
     def map(field, opts = {})
       as = opts.delete(:as)
       if as && as.is_a?(Array)
-        one_to_many.new(field, as[0])
+        one_to_many.new(field, as[0], opts)
       else
         one_to_one.new(field, opts)
       end
