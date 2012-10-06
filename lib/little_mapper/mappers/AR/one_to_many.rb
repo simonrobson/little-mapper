@@ -7,7 +7,7 @@ module LittleMapper
         def initialize(entity_field, persistent_klass, opts = {})
           @entity_field = entity_field
           @persistent_klass = persistent_klass
-          @persistent_field = opts[:persistent_field] || entity_field
+          @persistent_field = opts[:to] || entity_field
           @entity_collection_adder = opts[:entity_collection_adder]
         end
 

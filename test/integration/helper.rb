@@ -53,7 +53,7 @@ class PersonMapper
   maps :name, :age
   map :phone_numbers, :as => [PhoneNumber]
   map :all_cats, :as => [Cat], :entity_collection_adder => :receive_cat,
-      :persistent_field => :cats
+      :to => :cats
 end
 
 class PhoneNumber
@@ -68,7 +68,7 @@ class CatMapper
   entity Cat
   persistent_entity Persistent::Cat
   map :color
-  map :moniker, :persistent_field => :name
+  map :moniker, :to => :name
 end
 
 class CreatePeople < ActiveRecord::Migration

@@ -5,7 +5,7 @@ module LittleMapper
         attr_accessor :field, :persistent_field, :entity_setter, :persistent_entity_setter
         def initialize(field, opts = {})
           @field = field
-          @persistent_field = opts[:persistent_field] || field
+          @persistent_field = opts[:to] || field
           @entity_setter = opts[:entity_setter] || "#{field}=".to_sym
           @persistent_entity_setter = opts[:persistent_entity_setter] || "#{persistent_field}=".to_sym
         end

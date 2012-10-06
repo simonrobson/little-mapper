@@ -52,9 +52,14 @@ module LittleMapper
     #         :as            - The Class of Mapper to use to map an entity
     #                          value. Can be enclosed in Array notation to
     #                          signify a one to many relationship
+    #         :to            - Name of the field on the persistent entity
+    #                          to which we will map (default: field)
     #         :entity_setter - a Symbol representing the name of a function
     #                          to use when setting the value on the entity
     #                          (default: field=)
+    #         :entity_collection_adder - in a one-to-many relationship, the name of
+    #                          of a method to use when adding associated objetcs
+    #                          (default: to#<<)
     # Examples
     #
     #   map :metrics, :as => [Metric]
