@@ -1,6 +1,6 @@
-module SimpleMapper
+module LittleMapper
   module Result
-    class RepoSuccess < RepositoryResult
+    class RepoSuccess < RepoResult
       def success?; true; end
     end
   end

@@ -11,12 +11,12 @@ module LittleMapper
 
         def to_persistent(target)
           source.__send__(entity_field).each do |associated|
-            target.__send__(persistent_field).__send__(:<<, Mapper[persistent_klass].to_persistent(associated))
+            target.__send__(persistent_field).__send__(:<<, LittleMapper[persistent_klass].to_persistent(associated))
           end
         end
         def to_entity(target)
           source.__send__(persistent_field).each do |associated|
-            target.__send__(entity_field).__send__(:<<, Mapper[persistent_klass].to_entity(associated))
+            target.__send__(entity_field).__send__(:<<, LittleMapper[persistent_klass].to_entity(associated))
           end
         end
       end

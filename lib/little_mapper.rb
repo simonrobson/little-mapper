@@ -4,6 +4,9 @@ require "little_mapper/mapper_instance_methods"
 require "little_mapper/mapping_factory"
 require "little_mapper/mappers/mappers"
 require "little_mapper/mappers/active_record"
+require "little_mapper/result/repo_response"
+require "little_mapper/result/repo_success"
+require "little_mapper/result/repo_failure"
 
 module LittleMapper
 
@@ -38,6 +41,6 @@ module LittleMapper
   # Private: kicks off the action when this module is included
   def self.included(klass)
     klass.extend DslClassMethods
-    klass.module_eval { include DslInstanceMethods}
+    klass.module_eval { include MapperInstanceMethods}
   end
 end
