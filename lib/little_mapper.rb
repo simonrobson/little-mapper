@@ -1,5 +1,6 @@
 require "little_mapper/version"
 require "little_mapper/dsl_class_methods"
+require "little_mapper/mapper_instance_methods"
 require "little_mapper/mapping_factory"
 require "little_mapper/mappers/mappers"
 require "little_mapper/mappers/active_record"
@@ -34,9 +35,9 @@ module LittleMapper
     @mappers[key].new
   end
 
-  # Private: kicks off the action when this module is inherited
-  def self.inherited(klass)
+  # Private: kicks off the action when this module is included
+  def self.included(klass)
     klass.extend DslClassMethods
-    # klass.module_eval { include DslInstanceMethods}
+    klass.module_eval { include DslInstanceMethods}
   end
 end
