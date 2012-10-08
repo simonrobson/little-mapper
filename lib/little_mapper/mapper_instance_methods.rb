@@ -21,7 +21,7 @@ module LittleMapper
       pe = to_persistent(entity)
       if pe.save
         entity.id = pe.id # set this only if configured
-        LittleMapper::Result::RepoSuccess.new
+        LittleMapper::Result::RepoSuccess.new(pe)
       else
         LittleMapper::Result::RepoFailure.new(pe)
       end
