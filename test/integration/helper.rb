@@ -58,7 +58,7 @@ class PersonMapper
   map :spouse, :as => Person
 end
 
-class PhoneNumber
+class PhoneNumberMapper
   include LittleMapper
   entity PhoneNumber
   persistent_entity Persistent::PhoneNumber
