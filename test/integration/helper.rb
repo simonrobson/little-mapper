@@ -28,6 +28,14 @@ class Cat
   def initialize(opts = {})
     opts.each_pair {|k, v| self.send("#{k}=", v)}
   end
+
+  def owner=(owner)
+    @owner = owner
+  end
+
+  def owner
+    @owner
+  end
 end
 
 
@@ -54,7 +62,7 @@ class PersonMapper
   maps :name, :age
   map :phone_numbers, :as => [PhoneNumber]
   map :all_cats, :as => [Cat], :entity_collection_adder => :receive_cat,
-      :to => :cats
+      :to => :cats, :reflexive_setter => :owner=
   map :spouse, :as => Person
 end
 
