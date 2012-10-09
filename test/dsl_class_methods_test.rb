@@ -43,9 +43,9 @@ module LittleMapper
       factory = MiniTest::Mock.new
       TestClass.mapping_factory = factory
       args = [:a, :b, :c]
-      factory.expect(:map, true, [:a, {}])
-      factory.expect(:map, true, [:b, {}])
-      factory.expect(:map, true, [:c, {}])
+      factory.expect(:map, true, [TestClass, :a, {}])
+      factory.expect(:map, true, [TestClass, :b, {}])
+      factory.expect(:map, true, [TestClass, :c, {}])
       TestClass.maps(*args)
       factory.verify
     end
@@ -53,14 +53,10 @@ module LittleMapper
     def test_delegates_map_to_mapping_factory
       factory = MiniTest::Mock.new
       TestClass.mapping_factory = factory
-      args = [:field, :opt1 => :val, :opt2 => :val]
-      factory.expect(:map, true, args)
+      args = [:field, {:opt1 => :val, :opt2 => :val}]
+      factory.expect(:map, true, args.dup.unshift(TestClass))
       TestClass.map(*args)
       factory.verify
     end
-
-
-
-
   end
 end

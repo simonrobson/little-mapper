@@ -77,6 +77,18 @@ class ArSqliteTest < MiniTest::Unit::TestCase
     assert_equal found.spouse, o
   end
 
+  # def test_sets_up_reflexive_mapping_by_default_on_related_entities
+  #   p = Person.new(:name => 'John', :age => 27)
+  #   number1 = PhoneNumber.new(:code => '099', :number => '987654321')
+  #   p.phone_numbers << number1
+  #   p.phone_numbers << PhoneNumber.new(:code => '123', :number => '123456789')
+  #   LittleMapper[Person] << p
+  #   found = LittleMapper[Person].find_by_id(p.id)
+  #   assert_equal found, found.phone_numbers.first.person
+  # end
+
+
+
 
 
 end

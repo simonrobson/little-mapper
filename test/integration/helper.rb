@@ -17,7 +17,7 @@ class Person < OpenStruct
 end
 
 class PhoneNumber
-  attr_accessor :id, :code, :number
+  attr_accessor :id, :code, :number, :person
   def initialize(opts = {})
     opts.each_pair {|k, v| self.send("#{k}=", v)}
   end

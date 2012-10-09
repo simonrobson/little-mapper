@@ -2,8 +2,9 @@ module LittleMapper
   module Mappers
     module AR
       class OneToOne < Mappers::Base
-        attr_accessor :field, :persistent_klass, :persistent_field, :entity_setter, :persistent_entity_setter
-        def initialize(field, opts = {})
+        attr_accessor :mapper, :field, :persistent_klass, :persistent_field, :entity_setter, :persistent_entity_setter
+        def initialize(mapper, field, opts = {})
+          @mapper = mapper
           @field = field
           @persistent_klass = opts[:as]
           @persistent_field = opts[:to] || field

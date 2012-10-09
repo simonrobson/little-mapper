@@ -9,12 +9,12 @@ module LittleMapper
       @_strategy
     end
 
-    def map(field, opts = {})
+    def map(mapper, field, opts = {})
       if opts[:as] && opts[:as].is_a?(Array)
         as = opts.delete(:as)
-        one_to_many.new(field, as[0], opts)
+        one_to_many.new(mapper, field, as[0], opts)
       else
-        one_to_one.new(field, opts)
+        one_to_one.new(mapper, field, opts)
       end
     end
 

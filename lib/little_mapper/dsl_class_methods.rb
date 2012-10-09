@@ -65,7 +65,7 @@ module LittleMapper
     #   map :metrics, :as => [Metric]
     #   map :owner, :entity_setter => :assign_owner
     def map(field, opts = {})
-      add_mapping(mapping_factory.map(field, opts))
+      add_mapping(mapping_factory.map(self, field, opts))
     end
 
   end
