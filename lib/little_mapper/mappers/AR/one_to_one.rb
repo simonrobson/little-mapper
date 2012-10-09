@@ -13,7 +13,10 @@ module LittleMapper
 
         def to_persistent(target)
           if persistent_klass
-            target.__send__(persistent_entity_setter, LittleMapper[persistent_klass].to_persistent(source.__send__(field)))
+            val = source.__send__(field)
+            if val
+              target.__send__(persistent_entity_setter, LittleMapper[persistent_klass].to_persistent(source.__send__(field)))
+            end
           else
             target.__send__(persistent_entity_setter, source.__send__(field))
           end
@@ -21,7 +24,10 @@ module LittleMapper
 
         def to_entity(target)
           if persistent_klass
-            target.__send__(entity_setter, LittleMapper[persistent_klass].to_entity(source.__send__(persistent_field)))
+            val = source.__send__(persistent_field)
+            if val
+              target.__send__(entity_setter, LittleMapper[persistent_klass].to_entity(val))
+            end
           else
             target.__send__(entity_setter, source.__send__(persistent_field))
           end
