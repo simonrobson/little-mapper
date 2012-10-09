@@ -35,6 +35,7 @@ module Persistent
   class Person < ActiveRecord::Base
     has_many :phone_numbers
     has_many :cats
+    belongs_to :spouse, :class_name => 'Person'
   end
 
   class PhoneNumber < ActiveRecord::Base
@@ -54,6 +55,7 @@ class PersonMapper
   map :phone_numbers, :as => [PhoneNumber]
   map :all_cats, :as => [Cat], :entity_collection_adder => :receive_cat,
       :to => :cats
+  map :spouse, :as => Person
 end
 
 class PhoneNumber
@@ -76,6 +78,7 @@ class CreatePeople < ActiveRecord::Migration
     create_table :people, :force => true do |t|
       t.string :name
       t.integer :age
+      t.integer :spouse_id
       t.timestamps
     end
   end

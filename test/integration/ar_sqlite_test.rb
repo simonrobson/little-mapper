@@ -68,5 +68,15 @@ class ArSqliteTest < MiniTest::Unit::TestCase
     assert_equal 1, found.all_cats.length
   end
 
+  def test_one_to_one_with_another_entity
+    o = Person.new(:name => 'Jane', :age => 28)
+    LittleMapper[Person] << o
+    p = Person.new(:name => 'John', :age => 27, :spouse => o)
+    LittleMapper[Person] << p
+    found = LittleMapper[Person].find_by_id(p.id)
+    assert_equal found.spouse, o
+  end
+
+
 
 end

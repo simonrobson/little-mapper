@@ -15,7 +15,7 @@ module LittleMapper
           if persistent_klass
             val = source.__send__(field)
             if val
-              target.__send__(persistent_entity_setter, LittleMapper[persistent_klass].to_persistent(source.__send__(field)))
+              target.__send__(persistent_entity_setter, LittleMapper[persistent_klass].to_persistent(val))
             end
           else
             target.__send__(persistent_entity_setter, source.__send__(field))
