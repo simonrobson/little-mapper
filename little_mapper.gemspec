@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = LittleMapper::VERSION
   gem.authors       = ["Simon Robson"]
   gem.email         = ["shrobson@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Simple, ActiveRecord-backed data mapper / repository}
+  gem.summary       = %q{Simple, ActiveRecord-backed data mapper / repository}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)

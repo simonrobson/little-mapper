@@ -6,7 +6,7 @@ Early stage simple datamapper/repository backed by ActiveRecord (only, for the m
 
 Add this line to your application's Gemfile:
 
-    gem 'little_mapper'
+    gem 'little_mapper', :github => 'simonrobson/little-mapper'
 
 And then execute:
 
