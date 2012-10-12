@@ -1,12 +1,12 @@
 # LittleMapper
 
-Early stage simple datamapper/repository backed by ActiveRecord (only, for the moment). Still working out the best DSL. Currently in use on an internal project.
+Early stage sketch of a simple datamapper/repository (currently backed by ActiveRecord).
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'little_mapper', :github => 'simonrobson/little-mapper'
+    gem 'little_mapper'
 
 And then execute:
 
